@@ -1,0 +1,20 @@
+version: '3'
+services:
+    notebook:
+        ports:
+            - '8888:8888'
+        volumes:
+            - 'jupyter-data:/home/jovyan/work' #The owner of this repo is hardcoded into the image
+        image: jupyter/datascience-notebook:de0cd8011b9e
+        networks:
+            - jupyter
+networks:
+    jupyter:
+      name: jupyter
+volumes: 
+    jupyter-data:
+        driver_opts:
+              type: none
+              device: $DATA_VOLUME_PATH 
+              o: bind
+    
